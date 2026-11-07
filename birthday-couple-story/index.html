@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Ayang! | 8-Slide Romantic & Playful Story</title>
+
+    <!-- Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Happy Birthday Ayang! Ada Kejutan Khusus Buat Kamu 🎂💖">
+    <meta property="og:description" content="Website cerita interaktif 8 halaman khusus pasangan: ukur kadar bucin, tiup lilin 3D, kuis kejujuran, klaim kupon cinta, dan buka kado spesial!">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#f0f7ff">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Three.js (3D WebGL Engine) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP Animation Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <!-- Floating Romantic Hearts & Petals Layer -->
+    <div id="couple-petals-layer"></div>
+
+    <!-- ========================================================
+         TOP STORY STEPPER HEADER (8 SLIDES)
+         ======================================================== -->
+    <header class="couple-header">
+        <div class="couple-header-inner">
+            <div class="brand-badge">
+                <span>💘</span>
+                <span>Ayang Story</span>
+            </div>
+
+            <!-- Stepper indicators for 8 Slides -->
+            <div class="couple-stepper-row">
+                <div class="couple-stepper-item active" data-step="1" onclick="goToSlide(1)" title="1. Cover"></div>
+                <div class="couple-stepper-item" data-step="2" onclick="goToSlide(2)" title="2. Love Meter"></div>
+                <div class="couple-stepper-item" data-step="3" onclick="goToSlide(3)" title="3. Kue 3D"></div>
+                <div class="couple-stepper-item" data-step="4" onclick="goToSlide(4)" title="4. Kenangan"></div>
+                <div class="couple-stepper-item" data-step="5" onclick="goToSlide(5)" title="5. Kuis"></div>
+                <div class="couple-stepper-item" data-step="6" onclick="goToSlide(6)" title="6. Kupon Cinta"></div>
+                <div class="couple-stepper-item" data-step="7" onclick="goToSlide(7)" title="7. Buket Bunga"></div>
+                <div class="couple-stepper-item" data-step="8" onclick="goToSlide(8)" title="8. Kado"></div>
+            </div>
+
+            <button id="btn-couple-music-toggle" class="btn-couple-music">
+                <span>🎵</span> <span>BGM: Nyala</span>
+            </button>
+        </div>
+
+        <!-- Smooth Progress Strip -->
+        <div class="couple-progress-strip">
+            <div id="couple-progress-fill" class="couple-progress-fill"></div>
+        </div>
+    </header>
+
+    <!-- ========================================================
+         MAIN STORY VIEWPORT (8 FULL-SCREEN SLIDES)
+         ======================================================== -->
+    <main class="couple-viewport">
+
+        <!-- ====================================================
+             SLIDE 1: COVER SAMBUTAN SPESIAL AYANG
+             ==================================================== -->
+        <section id="couple-slide-1" class="story-slide-screen active">
+            <div class="slide-inner-card">
+                <span id="slide1-badge" class="slide-badge-pill">✨ OFFICIAL BIRTHDAY OF MY FAVORITE PERSON ✨</span>
+
+                <div class="slide1-couple-avatar">🥰💌</div>
+
+                <h1 class="slide-main-title">
+                    Happy Level Up,<br>
+                    <span class="highlight-couple js-name">Nabila Aurelia</span>!
+                    <span class="age-badge-circle js-age-badge">Level 21</span>
+                </h1>
+
+                <p id="slide1-sub" class="slide-lead-text">
+                    Hari ini semesta libur berputar sebentar demi merayakan ulang tahun manusia paling lucu, paling gemesin, dan paling ngangenin di dunia ini!
+                </p>
+
+                <div id="slide1-quote" class="slide1-funny-quote">
+                    “Terima kasih sudah lahir ke dunia ini, dan terima kasih sudah memilihku jadi pasanganmu (pilihan yang sangat tepat tentunya haha)!” 💖
+                </div>
+
+                <div style="font-family: var(--font-heading); font-size: 0.92rem; font-weight: 700; color: var(--pink-500); margin: 0.8rem 0 1.2rem;">
+                    Perjalanan cinta kita: <strong class="js-duration">730 Hari Indah</strong> bersama <span class="js-sender-nick">Daffa</span> ❤️
+                </div>
+
+                <div class="story-nav-buttons-row" style="justify-content: center;">
+                    <button class="btn-primary-couple" onclick="goToSlide(2)">
+                        <span>Mulai Petualangan Cinta 🚀 ➡️</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================
+             SLIDE 2: KALKULATOR KADAR BUCIN (LOVE METER)
+             ==================================================== -->
+        <section id="couple-slide-2" class="story-slide-screen">
+            <div class="slide-inner-card">
+                <span class="slide-badge-pill">HALAMAN 2 DARI 8 • LOVE METER 💘</span>
+
+                <h2 class="slide-main-title">Tes Kadar Bucin &amp; Sayang 📈</h2>
+                <p class="slide-lead-text">
+                    Banyak yang nanya seberapa sayang sih aku sama kamu? Coba ketuk tombol di bawah ini berkali-kali untuk mengukurnya:
+                </p>
+
+                <div class="love-meter-card">
+                    <div id="love-meter-heart" class="love-heart-graphic">💖</div>
+                    <div id="love-meter-number" class="love-meter-display">0%</div>
+
+                    <div class="love-progress-track">
+                        <div id="love-meter-fill" class="love-progress-fill"></div>
+                    </div>
+
+                    <button id="btn-boost-love-meter" class="btn-boost-love">
+                        <span>👆 Tambah Rasa Sayang!</span>
+                    </button>
+
+                    <div id="love-meter-status-msg" class="love-meter-overflow-msg"></div>
+                </div>
+
+                <div class="story-nav-buttons-row">
+                    <button class="btn-secondary-couple" onclick="goToSlide(1)">
+                        <span>⬅️ Cover</span>
+                    </button>
+                    <button class="btn-primary-couple" onclick="goToSlide(3)">
+                        <span>Lanjut ke Kue Ulang Tahun 🎂 ➡️</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================
+             SLIDE 3: 3D CAKE & TIUP LILIN
+             ==================================================== -->
+        <section id="couple-slide-3" class="story-slide-screen">
+            <div class="slide-inner-card">
+                <span class="slide-badge-pill">HALAMAN 3 DARI 8 • RITUAL TIUP LILIN 🕯️</span>
+
+                <h2 class="slide-main-title">Make a Wish &amp; Tiup Lilin 🎂</h2>
+                <p class="slide-lead-text">
+                    Drag untuk memutar kue 360°. Pejamkan mata, bayangkan wajah ganteng/cantik aku, buat harapan terbaikmu, lalu tekan tombol tiup!
+                </p>
+
+                <div id="couple-cake-status" class="cake-status-badge">
+                    🕯️ Lilin Menyala! Drag untuk putar 360° &amp; Klik lilin untuk tiup
+                </div>
+
+                <!-- 3D Three.js Cake Viewport -->
+                <div id="couple-cake-viewport" class="couple-cake-viewport"></div>
+
+                <div>
+                    <button id="btn-couple-blow" class="btn-primary-couple">
+                        <span>🕯️ Tiup Lilin 3D Sekarang!</span>
+                    </button>
+                </div>
+
+                <div id="couple-cake-wish-box" class="cake-wish-reveal">
+                    ✨ <strong>Doamu telah meluncur ke langit!</strong> Semoga bahagia selalu, makin sayang sama aku, dan rezekimu lancar terus ya sayang! 🕊️
+                </div>
+
+                <div class="story-nav-buttons-row">
+                    <button class="btn-secondary-couple" onclick="goToSlide(2)">
+                        <span>⬅️ Love Meter</span>
+                    </button>
+                    <button class="btn-primary-couple" onclick="goToSlide(4)">
+                        <span>Buka Lembaran Kenangan 📸 ➡️</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================
+             SLIDE 4: GALERI KENANGAN "MOMEN MANIS & RANDOM KITA"
+             ==================================================== -->
+        <section id="couple-slide-4" class="story-slide-screen">
+            <div class="slide-inner-card">
+                <span class="slide-badge-pill">HALAMAN 4 DARI 8 • JEJAK MEMORI 📸</span>
+
+                <h2 class="slide-main-title">Momen Manis &amp; Random Kita 🎞️</h2>
+                <p class="slide-lead-text" style="margin-bottom: 0.8rem;">
+                    Kumpulan memori di mana kita tertawa bareng, makan bareng, dan bikin momen gak terlupakan:
+                </p>
+
+                <!-- Tab Switcher -->
+                <div class="gallery-tabs-row">
+                    <button id="couple-tab-photos" class="tab-btn active">📸 Foto Polaroid</button>
+                    <button id="couple-tab-video" class="tab-btn">🎬 Video Lucu Kita</button>
+                </div>
+
+                <!-- Photos View -->
+                <div id="couple-view-photos">
+                    <div id="couple-polaroid-grid" class="couple-polaroid-grid">
+                        <!-- Hydrated from config.js -->
+                    </div>
+                </div>
+
+                <!-- Video View -->
+                <div id="couple-view-video" style="display: none;">
+                    <div id="couple-video-embed" class="couple-video-box">
+                        <!-- Embedded Video -->
+                    </div>
+                </div>
+
+                <div class="story-nav-buttons-row">
+                    <button class="btn-secondary-couple" onclick="goToSlide(3)">
+                        <span>⬅️ Kue 3D</span>
+                    </button>
+                    <button class="btn-primary-couple" onclick="goToSlide(5)">
+                        <span>Kuis Kejujuran Hubungan 🤫 ➡️</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================
+             SLIDE 5: KUIS KEJUJURAN HUBUNGAN ("SIAPA YANG PALING...")
+             ==================================================== -->
+        <section id="couple-slide-5" class="story-slide-screen">
+            <div class="slide-inner-card">
+                <span class="slide-badge-pill">HALAMAN 5 DARI 8 • KUIS KEJUJURAN 🤫</span>
+
+                <h2 class="slide-main-title">Kuis Kejujuran Hubungan 🤣</h2>
+                <p class="slide-lead-text">
+                    Jawab dengan jujur ya ayang, jangan ada dusta di antara kita!
+                </p>
+
+                <div id="couple-quiz-container" class="couple-quiz-list">
+                    <!-- Hydrated from config.js -->
+                </div>
+
+                <div class="story-nav-buttons-row">
+                    <button class="btn-secondary-couple" onclick="goToSlide(4)">
+                        <span>⬅️ Kenangan</span>
+                    </button>
+                    <button class="btn-primary-couple" onclick="goToSlide(6)">
+                        <span>Klaim Kupon Cinta 🎫 ➡️</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================
+             SLIDE 6: BUKU KUPON CINTA PASANGAN (BISA DI-KLAIM!)
+             ==================================================== -->
+        <section id="couple-slide-6" class="story-slide-screen">
+            <div class="slide-inner-card">
+                <span class="slide-badge-pill" style="background: var(--butter-yellow); color: #854d0e; border-color: #fef08a;">
+                    HALAMAN 6 DARI 8 • KUPON CINTA 🎫
+                </span>
+
+                <h2 class="slide-main-title">Buku Kupon Cinta Resmi ✨</h2>
+                <p class="slide-lead-text">
+                    Ketuk kupon di bawah ini untuk mengklaimnya! Berlaku seumur hidup tanpa masa kedaluwarsa:
+                </p>
+
+                <!-- Coupons Grid -->
+                <div id="couple-coupons-grid" class="couple-coupons-grid">
+                    <!-- Hydrated from config.js -->
+                </div>
+
+                <div class="story-nav-buttons-row">
+                    <button class="btn-secondary-couple" onclick="goToSlide(5)">
+                        <span>⬅️ Kuis Kejujuran</span>
+                    </button>
+                    <button class="btn-primary-couple" onclick="goToSlide(7)">
+                        <span>Terima Buket Bunga 💐 ➡️</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================
+             SLIDE 7: BUKET BUNGA MEKAR & PELUK VIRTUAL
+             ==================================================== -->
+        <section id="couple-slide-7" class="story-slide-screen">
+            <div class="slide-inner-card">
+                <span class="slide-badge-pill" style="background: var(--pink-100); color: var(--pink-500); border-color: var(--pink-300);">
+                    HALAMAN 7 DARI 8 • BUKET CINTA 💐
+                </span>
+
+                <h2 class="slide-main-title">Sebuket Doa &amp; Peluk Hangat 🌸</h2>
+                <p class="slide-lead-text" style="margin-bottom: 0.8rem;">
+                    Buket bunga abadi ini dipersembahkan khusus untuk mewarnai hari bahagiamu:
+                </p>
+
+                <div class="bouquet-visual-card">
+                    <div class="flower-bouquet-graphic">💐</div>
+                    <span class="flower-ribbon-tag">SPECIAL BLOSSOM BOUQUET FOR AYANG</span>
+
+                    <p class="flower-romantic-text">
+                        Kuberikan buket bunga abadi ini untukmu. Seperti kelopak bunga yang selalu mekar indah, semoga kamu selalu dikelilingi kebahagiaan, dijauhkan dari hal-hal yang bikin sedih, dan selalu merasa dicintai.
+                    </p>
+
+                    <p class="flower-quote-author">
+                        “In a room full of art, I would still stare at you.” 💖
+                    </p>
+
+                    <button id="btn-couple-rain-hearts" class="btn-primary-couple" style="margin-top: 1rem;">
+                        <span>💖 Kirim Ribuan Peluk &amp; Cium</span>
+                    </button>
+                </div>
+
+                <div class="story-nav-buttons-row">
+                    <button class="btn-secondary-couple" onclick="goToSlide(6)">
+                        <span>⬅️ Kupon Cinta</span>
+                    </button>
+                    <button class="btn-primary-couple" onclick="goToSlide(8)">
+                        <span>Buka Kado Utama &amp; Surat 🎁 ➡️</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====================================================
+             SLIDE 8: KADO SPESIAL & SURAT CINTA PENUTUP
+             ==================================================== -->
+        <section id="couple-slide-8" class="story-slide-screen">
+            <div class="slide-inner-card">
+                <span class="slide-badge-pill" style="background: var(--pink-100); color: var(--pink-500); border-color: var(--pink-300);">
+                    HALAMAN 8 DARI 8 • KADO UTAMA 🎁
+                </span>
+
+                <h2 class="slide-main-title">Kado Spesial &amp; Surat Dari Hatiku 💌</h2>
+                <p class="slide-lead-text" style="margin-bottom: 0.5rem;">
+                    Ada kado kejutan yang tersimpan di dalam sini untukmu:
+                </p>
+
+                <div class="gift-interactive-wrapper">
+                    <div id="couple-gift-box" class="gift-box-stage" title="Klik untuk membuka kado!">
+                        🎁
+                    </div>
+                    <p id="couple-gift-hint" style="color: var(--pink-500); font-weight: 700; font-size: 0.9rem;">
+                        (Ketuk kotak kado di atas untuk membukanya ✨)
+                    </p>
+
+                    <!-- Revealed Content After Tap -->
+                    <div id="couple-gift-opened" class="gift-revealed-card">
+                        <span class="gift-voucher-badge">VOUCHER SPESIAL DARI AYANG 🎫</span>
+                        <h3 id="slide8-gift-title" class="gift-voucher-title">
+                            Tiket Staycation &amp; Romantic Dinner Berdua!
+                        </h3>
+                        <p id="slide8-gift-desc" class="gift-voucher-desc">
+                            Voucher ini resmi berlaku untuk kita berdua healing santai! Plus kado fisik rahasia yang udah kukirim ke rumahmu 📦✨
+                        </p>
+
+                        <!-- Long Emotional Closing Letter -->
+                        <div class="gift-letter-box">
+                            <strong style="color: var(--pink-500); display: block; margin-bottom: 0.4rem;">
+                                Surat Spesial dari <span class="js-sender-nick">Daffa</span>:
+                            </strong>
+                            <p id="slide8-letter">
+                                Selamat ulang tahun sayangku. Terima kasih sudah menjadi rumah ternyaman buat aku pulang, terima kasih sudah menerima segala kurang dan lebihku. Di usiamu yang baru ini, jadilah pribadi yang paling bahagia ya. Aku akan selalu ada di sampingmu untuk mendukung semua mimpimu. I love you to the moon and back! ❤️
+                            </p>
+                        </div>
+
+                        <!-- Direct WhatsApp Thank You Button -->
+                        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                            <a id="btn-couple-wa-thanks" href="#" target="_blank" class="btn-whatsapp-couple-thanks">
+                                <span>💬 Balas WhatsApp ke <span class="js-sender-nick">Ayang</span></span>
+                            </a>
+                            <button class="btn-secondary-couple" onclick="goToSlide(1)">
+                                <span>🔄 Ulangi Cerita Dari Awal</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-nav-buttons-row">
+                    <button class="btn-secondary-couple" onclick="goToSlide(7)">
+                        <span>⬅️ Buket Bunga</span>
+                    </button>
+                    <button class="btn-primary-couple" onclick="goToSlide(1)">
+                        <span>Kembali ke Halaman 1 🚀</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================================
+         PHOTO LIGHTBOX MODAL
+         ======================================================== -->
+    <div id="couple-lightbox-modal" class="couple-lightbox-modal" onclick="closeCoupleLightbox()">
+        <div class="couple-lightbox-inner" onclick="event.stopPropagation()">
+            <button class="couple-lightbox-close" onclick="closeCoupleLightbox()">&times;</button>
+            <img id="couple-lightbox-img" src="" alt="Zoom Memory">
+            <div id="couple-lightbox-caption" style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; color: var(--text-main);"></div>
+        </div>
+    </div>
+
+    <!-- ========================================================
+         TOAST POPUP NOTIFICATION
+         ======================================================== -->
+    <div id="couple-toast-popup" class="couple-toast">
+        Notifikasi
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/sound-engine.js"></script>
+    <script src="js/three-cake.js"></script>
+    <script src="js/couple-app.js"></script>
+</body>
+</html>
